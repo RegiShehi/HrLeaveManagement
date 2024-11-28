@@ -10,4 +10,13 @@
         <ProjectReference Include="..\HrLeaveManagement.Domain\HrLeaveManagement.Domain.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="13.0.1"/>
+        <PackageReference Include="MediatR" Version="12.4.1"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Features\LeaveType\Commands\"/>
+    </ItemGroup>
+
 </Project>
