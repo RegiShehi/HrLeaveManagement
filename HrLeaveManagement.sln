@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HrLeaveManagement.Application", "src\Core\HrLeaveManagement.Application\HrLeaveManagement.Application.csproj", "{A34FFC82-40FE-4F8F-B5CC-31F9E45A89C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HrLeaveManagement.Persistence", "src\Infrastructure\HrLeaveManagement.Persistence\HrLeaveManagement.Persistence.csproj", "{A5B746C3-0159-4780-99C7-643040E30EAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{A34FFC82-40FE-4F8F-B5CC-31F9E45A89C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A34FFC82-40FE-4F8F-B5CC-31F9E45A89C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A34FFC82-40FE-4F8F-B5CC-31F9E45A89C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5B746C3-0159-4780-99C7-643040E30EAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5B746C3-0159-4780-99C7-643040E30EAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5B746C3-0159-4780-99C7-643040E30EAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5B746C3-0159-4780-99C7-643040E30EAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{34866521-BD0C-4803-99A3-545DEC412E94} = {407232C1-710E-48AF-818F-9E064ECE52FB}
@@ -38,5 +44,6 @@ Global
 		{DFA65B5E-9633-4AD8-91C0-ACE283E3D527} = {407232C1-710E-48AF-818F-9E064ECE52FB}
 		{6AFB0BC2-22B3-4089-9CA6-3CFD9299C76A} = {407232C1-710E-48AF-818F-9E064ECE52FB}
 		{A34FFC82-40FE-4F8F-B5CC-31F9E45A89C7} = {34866521-BD0C-4803-99A3-545DEC412E94}
+		{A5B746C3-0159-4780-99C7-643040E30EAC} = {6AFB0BC2-22B3-4089-9CA6-3CFD9299C76A}
 	EndGlobalSection
 EndGlobal
