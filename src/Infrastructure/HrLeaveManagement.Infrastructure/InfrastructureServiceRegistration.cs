@@ -1,6 +1,8 @@
 ﻿using HrLeaveManagement.Application.Contracts.Email;
+using HrLeaveManagement.Application.Contracts.Logging;
 using HrLeaveManagement.Application.Models.Email;
 using HrLeaveManagement.Infrastructure.EmailService;
+using HrLeaveManagement.Infrastructure.Logging;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,8 +15,8 @@ public static class InfrastructureServiceRegistration
     {
         // Configure EmailSettings using options pattern
         services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
-
         services.AddTransient<IEmailSender, EmailSender>();
+        services.AddSingleton(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
 
         return services;
     }
