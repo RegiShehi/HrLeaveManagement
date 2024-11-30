@@ -25,13 +25,15 @@ public class UpdateLeaveTypeCommandHandler(
             throw new BadRequestException("Invalid Leave type", validationResult);
         }
 
-        // Convert to domain entity object
-        var leaveTypeToUpdate = mapper.Map<Domain.LeaveType>(request);
+        var leaveType = await leaveTypeRepository.GetByIdAsync(request.Id);
 
-        // Add to database
-        await leaveTypeRepository.UpdateAsync(leaveTypeToUpdate);
+        if (leaveType is null)
+            throw new NotFoundException(nameof(LeaveType), request.Id);
 
-        // Return Unit value
+        mapper.Map(request, leaveType);
+
+        await leaveTypeRepository.UpdateAsync(leaveType);
+
         return Unit.Value;
     }
 }

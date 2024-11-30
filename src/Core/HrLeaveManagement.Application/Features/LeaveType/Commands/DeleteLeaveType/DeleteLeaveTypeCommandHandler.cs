@@ -15,7 +15,8 @@ public class DeleteLeaveTypeCommandHandler(ILeaveTypeRepository leaveTypeReposit
         var leaveTypeToDelete = await leaveTypeRepository.GetByIdAsync(request.Id);
 
         // Verify that record exists
-        if (leaveTypeToDelete is null) throw new NotFoundException(nameof(LeaveType), request.Id);
+        if (leaveTypeToDelete is null)
+            throw new NotFoundException(nameof(LeaveType), request.Id);
 
         // Remove from database
         await leaveTypeRepository.DeleteAsync(leaveTypeToDelete);
