@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace HrLeaveManagement.Persistence.DatabaseContext.Configurations;
+namespace HrLeaveManagement.Persistence.Configurations;
 
 public class LeaveTypeConfiguration : IEntityTypeConfiguration<LeaveType>
 {
