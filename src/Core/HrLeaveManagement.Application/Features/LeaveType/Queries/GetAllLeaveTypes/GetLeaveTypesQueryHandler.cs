@@ -19,7 +19,7 @@ public class GetLeaveTypesQueryHandler(
         // Convert data objects to DTO objects
         var data = mapper.Map<List<LeaveTypeDto>>(leaveTypes);
 
-        logger.LogInformation($"Leave types were retrieved successfully.");
+        logger.LogInformation("Leave types were retrieved successfully.");
         // Return list of DTO objects
         return data;
     }
