@@ -1,4 +1,6 @@
 ﻿using HrLeaveManagement.Application.Features.LeaveType.Commands.CreateLeaveType;
+using HrLeaveManagement.Application.Features.LeaveType.Commands.DeleteLeaveType;
+using HrLeaveManagement.Application.Features.LeaveType.Commands.UpdateLeaveType;
 using HrLeaveManagement.Application.Features.LeaveType.Queries.GetAllLeaveTypes;
 using HrLeaveManagement.Application.Features.LeaveType.Queries.GetLeaveTypeDetails;
 using MediatR;
@@ -11,11 +13,11 @@ namespace HrLeaveManagement.Api.Controllers;
 public class LeaveTypesController(IMediator mediator) : ControllerBase
 {
     [HttpGet]
-    public async Task<List<LeaveTypeDto>> GetAllLeaveTypes()
+    public async Task<ActionResult<List<LeaveTypeDto>>> GetAllLeaveTypes()
     {
         var leaveTypes = await mediator.Send(new GetLeaveTypesQuery());
 
-        return leaveTypes;
+        return Ok(leaveTypes);
     }
 
     [HttpGet("{id}")]
@@ -33,6 +35,33 @@ public class LeaveTypesController(IMediator mediator) : ControllerBase
     {
         var leaveType = await mediator.Send(leaveTypeCommand);
 
-        return CreatedAtAction(nameof(GetLeaveTypeDetails), new { id = leaveType });
+        return CreatedAtAction(nameof(GetLeaveTypeDetails), new { id = leaveType }, new
+        {
+            id = leaveType
+        });
+    }
+
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesDefaultResponseType]
+    public async Task<ActionResult> UpdateLeaveType(UpdateLeaveTypeCommand leaveTypeCommand)
+    {
+        await mediator.Send(leaveTypeCommand);
+
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesDefaultResponseType]
+    public async Task<ActionResult> DeleteLeaveType(int id)
+    {
+        var command = new DeleteLeaveTypeCommand { Id = id };
+        await mediator.Send(command);
+
+        return NoContent();
     }
 }
