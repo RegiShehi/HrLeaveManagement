@@ -1,3 +1,4 @@
+using HrLeaveManagement.Api.Middleware;
 using HrLeaveManagement.Application;
 using HrLeaveManagement.Infrastructure;
 using HrLeaveManagement.Persistence;
@@ -18,10 +19,10 @@ builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
+app.UseMiddleware<ExceptionMiddleware>();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment()) app.MapOpenApi();
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
