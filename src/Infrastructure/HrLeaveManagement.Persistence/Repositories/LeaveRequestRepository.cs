@@ -5,12 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HrLeaveManagement.Persistence.Repositories;
 
-public class LeaveRequestRepository : GenericRepository<LeaveRequest>, ILeaveRequestRepository
+public class LeaveRequestRepository(HrDatabaseContext context)
+    : GenericRepository<LeaveRequest>(context), ILeaveRequestRepository
 {
-    protected LeaveRequestRepository(HrDatabaseContext context) : base(context)
-    {
-    }
-
     public async Task<LeaveRequest?> GetLeaveRequestWithDetails(int id)
     {
         var leaveRequest = await Context.LeaveRequests
