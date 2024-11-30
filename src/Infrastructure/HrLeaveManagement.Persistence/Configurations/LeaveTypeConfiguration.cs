@@ -14,8 +14,8 @@ public class LeaveTypeConfiguration : IEntityTypeConfiguration<LeaveType>
                 Id = 1,
                 Name = "Vacation",
                 DefaultDays = 10,
-                DateCreated = DateTime.UtcNow,
-                DateModified = DateTime.UtcNow
+                DateCreated = new DateTime(2024, 11, 30, 17, 0, 0),
+                DateModified = new DateTime(2024, 11, 30, 17, 0, 0)
             });
     }
 }

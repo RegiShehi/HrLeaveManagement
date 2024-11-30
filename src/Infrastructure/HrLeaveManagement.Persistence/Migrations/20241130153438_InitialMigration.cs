@@ -79,11 +79,6 @@ namespace HrLeaveManagement.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "LeaveTypes",
-                columns: new[] { "Id", "DateCreated", "DateModified", "DefaultDays", "Name" },
-                values: new object[] { 1, new DateTime(2024, 11, 30, 15, 27, 8, 546, DateTimeKind.Utc).AddTicks(6385), new DateTime(2024, 11, 30, 15, 27, 8, 546, DateTimeKind.Utc).AddTicks(6629), 10, "Vacation" });
-
             migrationBuilder.CreateIndex(
                 name: "IX_LeaveAllocations_LeaveTypeId",
                 table: "LeaveAllocations",

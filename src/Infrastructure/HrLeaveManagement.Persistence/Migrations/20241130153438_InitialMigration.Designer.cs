@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HrLeaveManagement.Persistence.Migrations
 {
     [DbContext(typeof(HrDatabaseContext))]
-    [Migration("20241130152708_InitialMigration")]
+    [Migration("20241130153438_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -129,16 +129,6 @@ namespace HrLeaveManagement.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("LeaveTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateCreated = new DateTime(2024, 11, 30, 15, 27, 8, 546, DateTimeKind.Utc).AddTicks(6385),
-                            DateModified = new DateTime(2024, 11, 30, 15, 27, 8, 546, DateTimeKind.Utc).AddTicks(6629),
-                            DefaultDays = 10,
-                            Name = "Vacation"
-                        });
                 });
 
             modelBuilder.Entity("Domain.LeaveAllocation", b =>
