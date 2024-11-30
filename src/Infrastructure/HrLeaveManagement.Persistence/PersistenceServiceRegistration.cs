@@ -9,7 +9,7 @@ namespace HrLeaveManagement.Persistence;
 
 public static class PersistenceServiceRegistration
 {
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services,
+    public static IServiceCollection AddPersistanceServices(this IServiceCollection services,
         IConfiguration configuration)
     {
         services.AddDbContext<HrDatabaseContext>(options =>
