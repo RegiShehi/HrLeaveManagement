@@ -6,7 +6,7 @@ using HrLeaveManagement.Application.Features.LeaveAllocation.Queries.GetLeaveAll
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HrLeaveManagement.Api.Controllers;
+namespace HrLeaveManagement.Api.Features.LeaveAllocation;
 
 [Route("api/[controller]")]
 [ApiController]

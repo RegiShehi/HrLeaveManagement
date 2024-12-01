@@ -1,12 +1,11 @@
-﻿using HrLeaveManagement.Application.Features.LeaveType.Commands.CreateLeaveType;
+﻿using HrLeaveManagement.Api.Features.LeaveType.DTOs;
 using HrLeaveManagement.Application.Features.LeaveType.Commands.DeleteLeaveType;
-using HrLeaveManagement.Application.Features.LeaveType.Commands.UpdateLeaveType;
 using HrLeaveManagement.Application.Features.LeaveType.Queries.GetAllLeaveTypes;
 using HrLeaveManagement.Application.Features.LeaveType.Queries.GetLeaveTypeDetails;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HrLeaveManagement.Api.Controllers;
+namespace HrLeaveManagement.Api.Features.LeaveType;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -31,9 +30,11 @@ public class LeaveTypesController(IMediator mediator) : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> CreateLeaveType(CreateLeaveTypeCommand leaveTypeCommand)
+    public async Task<ActionResult> CreateLeaveType(CreateLeaveTypeDto leaveTypeCommand)
     {
-        var leaveType = await mediator.Send(leaveTypeCommand);
+        var command = leaveTypeCommand.ToCreateLeaveTypeCommand();
+
+        var leaveType = await mediator.Send(command);
 
         return CreatedAtAction(nameof(GetLeaveTypeDetails), new { id = leaveType }, new
         {
@@ -46,9 +47,11 @@ public class LeaveTypesController(IMediator mediator) : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]
-    public async Task<ActionResult> UpdateLeaveType(UpdateLeaveTypeCommand leaveTypeCommand)
+    public async Task<ActionResult> UpdateLeaveType(UpdateLeaveTypeDto leaveTypeCommand)
     {
-        await mediator.Send(leaveTypeCommand);
+        var command = leaveTypeCommand.ToUpdateLeaveTypeCommand();
+
+        await mediator.Send(command);
 
         return NoContent();
     }

@@ -8,7 +8,7 @@ using HrLeaveManagement.Application.Features.LeaveRequest.Queries.GetLeaveReques
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HrLeaveManagement.Api.Controllers;
+namespace HrLeaveManagement.Api.Features.LeaveRequest;
 
 [Route("api/[controller]")]
 [ApiController]
