@@ -9,5 +9,10 @@ public class BadRequestException : Exception
         ValidationErrors = validationResult.ToDictionary();
     }
 
+    public BadRequestException(string message, Dictionary<string, string[]> errors) : base(message)
+    {
+        ValidationErrors = errors;
+    }
+
     public IDictionary<string, string[]> ValidationErrors { get; set; }
 }

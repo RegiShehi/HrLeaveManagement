@@ -1,3 +1,4 @@
+using HrLeaveManagement.Api;
 using HrLeaveManagement.Api.Middleware;
 using HrLeaveManagement.Application;
 using HrLeaveManagement.Infrastructure;
@@ -15,6 +16,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("all", b => b.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
+builder.Services.AddApiServices();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
