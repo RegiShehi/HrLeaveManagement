@@ -27,7 +27,7 @@ public class GetLeaveTypeListQueryHandlerTests
     }
 
     [Fact]
-    public async Task GetLeaveTypesQueryHandler_WithNoParams_ReturnsAllLeaveTypes()
+    public async Task GetLeaveTypesQueryHandler_WithData_ReturnsAllLeaveTypes()
     {
         // arrange
         var handler = new GetLeaveTypesQueryHandler(_mapper, _mockRepo.Object, _mockAppLogger.Object);
@@ -41,5 +41,8 @@ public class GetLeaveTypeListQueryHandlerTests
 
         // Assert.IsType<List<LeaveTypeDto>>(result);
         // Assert.Equal(3, result.Count);
+
+        _mockRepo.Verify(repo => repo.GetAsync(), Times.Once);
+        _mockAppLogger.Verify(logger => logger.LogInformation(It.IsAny<string>()), Times.Once);
     }
 }
