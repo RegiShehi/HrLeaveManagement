@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Domain;
+﻿using Domain;
 using HrLeaveManagement.Persistence.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Shouldly;
