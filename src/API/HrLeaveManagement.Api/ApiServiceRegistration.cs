@@ -10,7 +10,7 @@ public static class ApiServiceRegistration
         // Handle validation errors when custom validation is bypassed
         services.Configure<ApiBehaviorOptions>(options =>
         {
-            options.InvalidModelStateResponseFactory = context =>
+            options.InvalidModelStateResponseFactory = (context) =>
             {
                 var errors = context.ModelState
                     .Where(ms => ms.Value is { Errors.Count: > 0 })

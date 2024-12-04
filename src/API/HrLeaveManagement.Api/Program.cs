@@ -4,10 +4,17 @@ using HrLeaveManagement.Application;
 using HrLeaveManagement.Identity;
 using HrLeaveManagement.Infrastructure;
 using HrLeaveManagement.Persistence;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Host.UseSerilog((context, loggerConfig) =>
+    loggerConfig
+        .WriteTo.Console()
+        .ReadFrom.Configuration(context.Configuration)
+);
+
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddPersistenceServices(builder.Configuration);
@@ -29,6 +36,10 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment()) app.MapOpenApi();
+
+app.UseSerilogRequestLogging();
+
+app.UseCors("all");
 
 app.UseHttpsRedirection();
 app.UseAuthorization();

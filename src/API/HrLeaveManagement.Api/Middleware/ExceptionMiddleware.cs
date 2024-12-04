@@ -1,10 +1,11 @@
 ﻿using System.Net;
 using HrLeaveManagement.Api.Models;
 using HrLeaveManagement.Application.Exceptions;
+using Newtonsoft.Json;
 
 namespace HrLeaveManagement.Api.Middleware;
 
-public class ExceptionMiddleware(RequestDelegate next)
+public class ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
 {
     public async Task InvokeAsync(HttpContext context)
     {
@@ -60,6 +61,8 @@ public class ExceptionMiddleware(RequestDelegate next)
         }
 
         context.Response.StatusCode = (int)statusCode;
+        var logMessage = JsonConvert.SerializeObject(problem);
+        logger.LogError(logMessage);
 
         await context.Response.WriteAsJsonAsync(problem);
     }
