@@ -1,6 +1,9 @@
 ﻿using Domain;
+using HrLeaveManagement.Application.Contracts.Identity;
+using HrLeaveManagement.Application.Contracts.Persistence;
 using HrLeaveManagement.Persistence.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using Shouldly;
 
 namespace HrLeaveManagement.Application.IntegrationTests;
@@ -11,10 +14,11 @@ public class HrDatabaseContextTests
 
     public HrDatabaseContextTests()
     {
+        var mockUserService = new Mock<IUserService>();
         var dbOptions = new DbContextOptionsBuilder<HrDatabaseContext>()
             .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options;
 
-        _hrDatabaseContext = new HrDatabaseContext(dbOptions);
+        _hrDatabaseContext = new HrDatabaseContext(dbOptions, mockUserService.Object);
     }
 
     [Fact]
