@@ -14,6 +14,7 @@ public class LeaveRequestRepository(HrDatabaseContext context)
             .Where(q => !string.IsNullOrEmpty(q.RequestingEmployeeId))
             .Include(q => q.LeaveType)
             .ToListAsync();
+
         return leaveRequests;
     }
 
@@ -23,6 +24,7 @@ public class LeaveRequestRepository(HrDatabaseContext context)
             .Where(q => q.RequestingEmployeeId == userId)
             .Include(q => q.LeaveType)
             .ToListAsync();
+
         return leaveRequests;
     }
 

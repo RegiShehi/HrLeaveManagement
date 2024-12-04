@@ -23,7 +23,7 @@ public class CancelLeaveRequestCommandHandler(
         await leaveRequestRepository.UpdateAsync(leaveRequest);
 
         // if already approved, re-evaluate the employee's allocations for the leave type
-        if (leaveRequest.Approved == true)
+        if (leaveRequest.Approved is true)
         {
             var daysRequested = (int)(leaveRequest.EndDate - leaveRequest.StartDate).TotalDays;
             var allocation = await leaveAllocationRepository.GetUserAllocations(leaveRequest.RequestingEmployeeId,

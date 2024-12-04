@@ -18,7 +18,7 @@ public class LeaveRequestsController(IMediator mediator) : ControllerBase
 {
     // GET: api/<LeaveRequestsController>
     [HttpGet]
-    public async Task<ActionResult<List<LeaveRequestListDto>>> GetAllLeaveRequests(bool isLoggedInUser = false)
+    public async Task<ActionResult<List<LeaveRequestListDto>>> Get(bool isLoggedInUser = false)
     {
         var leaveRequests = await mediator.Send(new GetLeaveRequestListQuery());
 
@@ -27,9 +27,10 @@ public class LeaveRequestsController(IMediator mediator) : ControllerBase
 
     // GET api/<LeaveRequestsController>/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<LeaveRequestDetailsDto>> GetLeaveRequestDetails(int id)
+    public async Task<ActionResult<LeaveRequestDetailsDto>> Get(int id)
     {
         var leaveRequest = await mediator.Send(new GetLeaveRequestDetailQuery { Id = id });
+
         return Ok(leaveRequest);
     }
 
@@ -38,10 +39,11 @@ public class LeaveRequestsController(IMediator mediator) : ControllerBase
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult> CreateLeaveRequest(CreateLeaveRequestCommand leaveRequest)
+    public async Task<ActionResult> Post(CreateLeaveRequestCommand leaveRequest)
     {
         var response = await mediator.Send(leaveRequest);
-        return CreatedAtAction(nameof(GetLeaveRequestDetails), new { id = response }, new { id = response });
+
+        return CreatedAtAction(nameof(Get), new { id = response });
     }
 
     // PUT api/<LeaveRequestsController>/5
@@ -50,7 +52,7 @@ public class LeaveRequestsController(IMediator mediator) : ControllerBase
     [ProducesResponseType(400)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]
-    public async Task<ActionResult> UpdateLeaveRequest(UpdateLeaveRequestCommand leaveRequest)
+    public async Task<ActionResult> Put(UpdateLeaveRequestCommand leaveRequest)
     {
         await mediator.Send(leaveRequest);
 
@@ -64,7 +66,7 @@ public class LeaveRequestsController(IMediator mediator) : ControllerBase
     [ProducesResponseType(400)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]
-    public async Task<ActionResult> CancelLeaveRequest(CancelLeaveRequestCommand cancelLeaveRequest)
+    public async Task<ActionResult> CancelRequest(CancelLeaveRequestCommand cancelLeaveRequest)
     {
         await mediator.Send(cancelLeaveRequest);
 
@@ -78,7 +80,7 @@ public class LeaveRequestsController(IMediator mediator) : ControllerBase
     [ProducesResponseType(400)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]
-    public async Task<ActionResult> UpdateApprovalLeaveRequest(ChangeLeaveRequestApprovalCommand updateApprovalRequest)
+    public async Task<ActionResult> UpdateApproval(ChangeLeaveRequestApprovalCommand updateApprovalRequest)
     {
         await mediator.Send(updateApprovalRequest);
 
@@ -90,7 +92,7 @@ public class LeaveRequestsController(IMediator mediator) : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]
-    public async Task<ActionResult> DeleteLeaveRequest(int id)
+    public async Task<ActionResult> Delete(int id)
     {
         var command = new DeleteLeaveRequestCommand { Id = id };
 
