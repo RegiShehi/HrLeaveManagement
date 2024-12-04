@@ -8,19 +8,12 @@ namespace HrLeaveManagement.Persistence.Repositories;
 public class LeaveRequestRepository(HrDatabaseContext context)
     : GenericRepository<LeaveRequest>(context), ILeaveRequestRepository
 {
-    public async Task<LeaveRequest?> GetLeaveRequestWithDetails(int id)
-    {
-        var leaveRequest = await Context.LeaveRequests
-            .Include(q => q.LeaveType).FirstOrDefaultAsync(q => q.Id == id);
-
-        return leaveRequest;
-    }
-
     public async Task<List<LeaveRequest>> GetLeaveRequestsWithDetails()
     {
         var leaveRequests = await Context.LeaveRequests
-            .Include(q => q.LeaveType).ToListAsync();
-
+            .Where(q => !string.IsNullOrEmpty(q.RequestingEmployeeId))
+            .Include(q => q.LeaveType)
+            .ToListAsync();
         return leaveRequests;
     }
 
@@ -28,8 +21,17 @@ public class LeaveRequestRepository(HrDatabaseContext context)
     {
         var leaveRequests = await Context.LeaveRequests
             .Where(q => q.RequestingEmployeeId == userId)
-            .Include(q => q.LeaveType).ToListAsync();
-
+            .Include(q => q.LeaveType)
+            .ToListAsync();
         return leaveRequests;
+    }
+
+    public async Task<LeaveRequest?> GetLeaveRequestWithDetails(int id)
+    {
+        var leaveRequest = await Context.LeaveRequests
+            .Include(q => q.LeaveType)
+            .FirstOrDefaultAsync(q => q.Id == id);
+
+        return leaveRequest;
     }
 }

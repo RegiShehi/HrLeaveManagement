@@ -6,11 +6,13 @@ using HrLeaveManagement.Application.Features.LeaveRequest.Commands.UpdateLeaveRe
 using HrLeaveManagement.Application.Features.LeaveRequest.Queries.GetLeaveRequestDetail;
 using HrLeaveManagement.Application.Features.LeaveRequest.Queries.GetLeaveRequestList;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HrLeaveManagement.Api.Features.LeaveRequest;
 
 [Route("api/[controller]")]
+[Authorize]
 [ApiController]
 public class LeaveRequestsController(IMediator mediator) : ControllerBase
 {

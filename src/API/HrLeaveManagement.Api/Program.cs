@@ -18,6 +18,8 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("all", b => b.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
+
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddApiServices();
 builder.Services.AddOpenApi();
 

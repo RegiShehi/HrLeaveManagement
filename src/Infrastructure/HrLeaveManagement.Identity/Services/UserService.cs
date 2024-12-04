@@ -1,12 +1,16 @@
-﻿using HrLeaveManagement.Application.Contracts.Identity;
+﻿using System.Security.Claims;
+using HrLeaveManagement.Application.Contracts.Identity;
 using HrLeaveManagement.Application.Models.Identity;
 using HrLeaveManagement.Identity.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
 namespace HrLeaveManagement.Identity.Services;
 
-public class UserService(UserManager<ApplicationUser> userManager) : IUserService
+public class UserService(UserManager<ApplicationUser> userManager, IHttpContextAccessor contextAccessor) : IUserService
 {
+    public string UserId => contextAccessor.HttpContext?.User.FindFirstValue("uid") ?? string.Empty;
+
     public async Task<Employee?> GetEmployee(string userId)
     {
         var employee = await userManager.FindByIdAsync(userId);
